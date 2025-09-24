@@ -38,7 +38,7 @@ public class AutorControllerV1 {
     }
 
     @PatchMapping("/{id}")
-    public  ResponseEntity<AutorDto> update(
+    public ResponseEntity<AutorDto> update(
             @PathVariable("id") UUID id,
             @Valid @RequestBody AutorDto autorDto) {
         return ResponseEntity.ok(autorService.update(id, autorDto));
