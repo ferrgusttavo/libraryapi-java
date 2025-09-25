@@ -1,5 +1,6 @@
-package br.com.ferrgusttavo.libraryapp.dto;
+package br.com.ferrgusttavo.libraryapp.dto.livro;
 
+import br.com.ferrgusttavo.libraryapp.dto.AutorDto;
 import br.com.ferrgusttavo.libraryapp.model.Livro;
 
 import java.util.List;

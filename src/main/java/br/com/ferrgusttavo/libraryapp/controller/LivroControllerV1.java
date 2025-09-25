@@ -1,8 +1,8 @@
 package br.com.ferrgusttavo.libraryapp.controller;
 
-import br.com.ferrgusttavo.libraryapp.dto.LivroCreateDto;
-import br.com.ferrgusttavo.libraryapp.dto.LivroDto;
-import br.com.ferrgusttavo.libraryapp.dto.LivroPatchDto;
+import br.com.ferrgusttavo.libraryapp.dto.livro.CreateLivroDto;
+import br.com.ferrgusttavo.libraryapp.dto.livro.LivroDto;
+import br.com.ferrgusttavo.libraryapp.dto.livro.PatchLivroDto;
 import br.com.ferrgusttavo.libraryapp.service.LivroService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ public class LivroControllerV1 {
 
     @Transactional
     @PostMapping
-    public ResponseEntity<LivroDto> save(@Valid @RequestBody LivroCreateDto dto) {
+    public ResponseEntity<LivroDto> save(@Valid @RequestBody CreateLivroDto dto) {
         return ResponseEntity.ok(livroService.save(dto));
     }
 
@@ -43,7 +43,7 @@ public class LivroControllerV1 {
     @PatchMapping("/{id}")
     public ResponseEntity<LivroDto> update(
             @PathVariable("id") UUID id,
-            @RequestBody LivroPatchDto dto) {
+            @RequestBody PatchLivroDto dto) {
         return ResponseEntity.ok(livroService.update(id, dto));
     }
 

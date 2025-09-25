@@ -1,8 +1,8 @@
 package br.com.ferrgusttavo.libraryapp.service;
 
-import br.com.ferrgusttavo.libraryapp.dto.LivroCreateDto;
-import br.com.ferrgusttavo.libraryapp.dto.LivroDto;
-import br.com.ferrgusttavo.libraryapp.dto.LivroPatchDto;
+import br.com.ferrgusttavo.libraryapp.dto.livro.CreateLivroDto;
+import br.com.ferrgusttavo.libraryapp.dto.livro.LivroDto;
+import br.com.ferrgusttavo.libraryapp.dto.livro.PatchLivroDto;
 import br.com.ferrgusttavo.libraryapp.model.Autor;
 import br.com.ferrgusttavo.libraryapp.model.Livro;
 import br.com.ferrgusttavo.libraryapp.repository.AutorRepository;
@@ -47,16 +47,16 @@ public class LivroServiceImpl implements LivroService {
 
     @Transactional
     @Override
-    public LivroDto save(LivroCreateDto livroCreateDto) {
-        List<Autor> autores = livroCreateDto.autorId().stream()
+    public LivroDto save(CreateLivroDto createLivroDto) {
+        List<Autor> autores = createLivroDto.autorId().stream()
                 .map(id -> autorRepository.findById(id)
                         .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado: " + id)))
                 .toList();
 
         Livro livro = Livro.builder()
-                .titulo(livroCreateDto.titulo())
-                .descricao(livroCreateDto.descricao())
-                .qtdePaginas(livroCreateDto.qtdePaginas())
+                .titulo(createLivroDto.titulo())
+                .descricao(createLivroDto.descricao())
+                .qtdePaginas(createLivroDto.qtdePaginas())
                 .build();
 
         livro.getAutores().addAll(autores);
@@ -66,16 +66,16 @@ public class LivroServiceImpl implements LivroService {
 
     @Transactional
     @Override
-    public LivroDto update(UUID id, LivroPatchDto livroPatchDto) {
+    public LivroDto update(UUID id, PatchLivroDto patchLivroDto) {
         var livro = livroRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Livro não encontrado."));
 
-        Optional.ofNullable(livroPatchDto.titulo()).ifPresent(livro::setTitulo);
-        Optional.ofNullable(livroPatchDto.descricao()).ifPresent(livro::setDescricao);
-        Optional.ofNullable(livroPatchDto.qtdePaginas()).ifPresent(livro::setQtdePaginas);
+        Optional.ofNullable(patchLivroDto.titulo()).ifPresent(livro::setTitulo);
+        Optional.ofNullable(patchLivroDto.descricao()).ifPresent(livro::setDescricao);
+        Optional.ofNullable(patchLivroDto.qtdePaginas()).ifPresent(livro::setQtdePaginas);
 
-        if (livroPatchDto.autorId() != null && !livroPatchDto.autorId().isEmpty()) {
-            List<Autor> autores = livroPatchDto.autorId().stream()
+        if (patchLivroDto.autorId() != null && !patchLivroDto.autorId().isEmpty()) {
+            List<Autor> autores = patchLivroDto.autorId().stream()
                     .map(autorId -> autorRepository.findById(autorId)
                             .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado: " + autorId)))
                     .toList();

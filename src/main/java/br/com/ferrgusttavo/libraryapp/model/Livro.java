@@ -1,6 +1,5 @@
 package br.com.ferrgusttavo.libraryapp.model;
 
-import br.com.ferrgusttavo.libraryapp.dto.LivroDto;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,9 +1,9 @@
-package br.com.ferrgusttavo.libraryapp.dto;
+package br.com.ferrgusttavo.libraryapp.dto.livro;
 
 import java.util.List;
 import java.util.UUID;
 
-public record LivroPatchDto(
+public record PatchLivroDto(
         String titulo,
         String descricao,
         Integer qtdePaginas,

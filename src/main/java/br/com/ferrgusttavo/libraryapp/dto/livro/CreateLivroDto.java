@@ -1,4 +1,4 @@
-package br.com.ferrgusttavo.libraryapp.dto;
+package br.com.ferrgusttavo.libraryapp.dto.livro;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 import java.util.UUID;
 
-public record LivroCreateDto(
+public record CreateLivroDto(
         @NotBlank String titulo,
         @NotBlank String descricao,
         @Positive Integer qtdePaginas,
